@@ -1,0 +1,36 @@
+{
+  "name": "mongoose-queue",
+  "version": "0.1.0",
+  "description": "A simple queue using mongoose.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec --recursive",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --recursive"
+  },
+  "keywords": [
+    "mongoose",
+    "mongodb",
+    "queue"
+  ],
+  "author": "Christian Kuhn <c.kuhn@qn-solutions.de> (http://www.qn-solutions.de)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/QN-Solutions/MongooseQueue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QN-Solutions/MongooseQueue/issues"
+  },
+  "homepage": "https://github.com/QN-Solutions/MongooseQueue",
+  "dependencies": {
+    "mongoose": "^4.5.8",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.1",
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.1",
+    "mockgoose": "^6.0.6"
+  }
+}
