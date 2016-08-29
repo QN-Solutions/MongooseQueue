@@ -28,7 +28,7 @@ var Job = new Schema({
 	},
 	// Payload is a reference to another mongoose object 
 	payload: {
-		type: Schema.ObjectId,
+		type: Schema.Types.Mixed,
 		required: true
 	},
 	// Is the job done or not (Does not matter if successful or not)
