@@ -14,11 +14,6 @@ When a job is fetched from the queue by calling the get method it is blocked for
 ### Initialization
 ```javascript
 var MongooseQueue = require('mongoose-queue').MongooseQueue;
-var JobSchema = require('mongoose-queue').JobSchema;
-```
-You need to create the model for the job by providing the collection name you intend to use for the queue (ie. queue).
-```javascript
-var Job = JobSchema('queue');
 ```
 
 ### Class instantiation
@@ -30,12 +25,14 @@ MongooseQueue.constructor(payloadModel, workerId = '', options = {})
 - payloadModel: The name of the Mongoose model used as payload.
 - workerId: A custom name for this instance/worker of the queue. Defaults to ''.
 - options: Additional options to configure the instance.
+	- payloadRefType: The mongoose type used for the _id field of your payload schema. Defaults to ObjectId.
 	- queueCollection: Name of the queues model/collection. Defaults to 'queue'.
 	- blockDuration: Time in ms a job is blocked, when a worker fetched it from the queue. Defaults to 30000.
 	- maxRetries: Maximum number of retries until a job is considered failed. Defaults to 5.
 #### Example
 ```javascript
 var myOptions = {
+	payloadRefType: mongoose.Types.UUID,
 	queueCollection: 'queue',
 	blockDuration: 30000,
 	maxRetries: 5

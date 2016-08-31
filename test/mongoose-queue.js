@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect;
+var mongoose = require('mongoose');
 var Promise = require('bluebird');
 
 // Mocks
@@ -11,7 +12,7 @@ var Helper = require('./helper.js');
 var MongooseQueue = require('../index').MongooseQueue;
 
 var JobSchema = require('../index').JobSchema;
-var Job = JobSchema('queue');
+var Job = JobSchema('queue', mongoose.Schema.Types.ObjectId);
 
 describe('MongooseQueue', function()
 {
@@ -22,6 +23,9 @@ describe('MongooseQueue', function()
 			var queue = new MongooseQueue('payload', '123456789');
 
 			expect(queue.options.queueCollection).to.equal('queue');
+			expect(queue.options.payloadRefType).to.equal(mongoose.Schema.Types.ObjectId);
+			expect(queue.options.blockDuration).to.equal(30000);
+			expect(queue.options.maxRetries).to.equal(5);
 			
 			done();
 		});
@@ -62,7 +66,7 @@ describe('MongooseQueue', function()
 
 					Job.findById(jobId, function(err, queuedJob)
 					{
-						expect(queuedJob.payload.equals(samplePayload._id)).to.be.true;
+						expect(queuedJob.payload.toString()).to.equal(samplePayload._id.toString());
 						done();
 					});
 				});
