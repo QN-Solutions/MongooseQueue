@@ -1,7 +1,8 @@
 'use strict'
 
 var mongoose = require('mongoose');
-var mockgoose = require('mockgoose');
+var Mockgoose = require('mockgoose').Mockgoose;
+var mockgoose = new Mockgoose(mongoose);
 var bluebird = require('bluebird');
 
 before(function(done)
@@ -10,8 +11,7 @@ before(function(done)
 
 	mongoose.Promise = bluebird;
 
-	mockgoose(mongoose).then(function()
-	{
+	mockgoose.prepareStorage().then(function() {
 		mongoose.connect('http://localhost/mongoose-queue-test', function(err)
 		{
 			done();
