@@ -14,7 +14,7 @@ before(function(done)
 	mockgoose.prepareStorage().then(function() {
 		mongoose.connect('http://localhost/mongoose-queue-test', function(err)
 		{
-			done();
+			done(err);
 		});
 	});
 });
